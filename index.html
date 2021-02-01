@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react demo</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <!-- <script src="node_modules/babel-standalone/src/index.js"></script> -->
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+       
+        // function test(){
+        //     let time = new Date().toLocaleTimeString()
+        //     let temp= <div>
+        //         <h1 className="name">这是时间</h1>
+        //         <h1 className="name">{time}</h1>
+        //         </div>
+        //   ReactDOM.render(
+        //     temp
+        //     ,document.getElementById('app')
+        //   )  
+        // }
+        // // setInterval(test,1000)
+
+        // // 函数式组件 无状态 
+        // function Hello(props){
+        //     return <h1>这是函数式组件{props.name}</h1>
+        // }
+        // ReactDOM.render(<Hello name="jack" />,document.getElementById('app'))
+
+        // class 声明 有状态
+        class Test12 extends React.Component{
+            constructor(props,cont){
+                console.log('初始化阶段')
+                console.log(cont)
+                console.log(props)
+                super(props,cont);
+                this.state={
+                    name:'jack',
+                    age:30
+                }
+            }
+            componentWillMount(){
+                // 拿接口数据，赋值
+                console.log('组件加载前')
+            }
+            componentDidMount(){
+                console.log('组件加载以后')
+            }
+            updateUser=()=>{
+                this.state.age +=1
+                this.setState({
+                    name:'kkkk',
+                    age:this.state.age
+                })
+            }
+            shouldComponentUpdate(){
+                console.log('数据是否需要更新')
+                // 如果返回false表示数据不需要更新
+                return true
+            }
+            componentWillUpdate(){
+                console.log('数据将要更新')
+            }
+            componentDidUpdate(){
+                console.log('数据已经更新')
+            }
+            render(){
+                // 状态发生变化就会触发
+                console.log('组件加载或者数据更新')
+                return <div>
+                <h1 className="name">这是时间</h1>
+                <h1 className="name">{this.state.name}</h1>
+                <div className="name">{this.state.age}</div>
+                <button onClick={this.updateUser}>更新数据</button>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Test12 name ="jack5555" time="123" />
+            ,document.getElementById('app')
+        )
+
+         
+    </script>
+</body>
+</html>
